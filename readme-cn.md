@@ -1,3 +1,4 @@
+[**English**](./readme.md)
 # 矩阵计算器 (Matrix Calculator)
 
 **By lviesever**
@@ -42,7 +43,7 @@
 - **GUI 框架**: Qt 6
 - **开发环境**: Visual Studio 2026 Insiders
 
-## 🚀 如何编译
+## 如何编译
 
 ### 依赖环境
 
