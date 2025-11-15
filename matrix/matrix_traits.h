@@ -1,3 +1,5 @@
+// Copyright (c) 2025 Iviesever
+
 #pragma once
 
 template<typename T>
