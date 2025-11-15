@@ -1,3 +1,5 @@
+// Copyright (c) 2025 Iviesever
+
 #pragma once
 #include <format>
 #include <stdexcept>
@@ -107,44 +109,36 @@ struct std::formatter<rational>
 };
 
 template <std::ranges::range Range>
-// Ìí¼ÓÒ»¸ö requires ×Ó¾äÒÔ±ÜÃâÓë std::string ºÍ std::string_view µÄÄ¬ÈÏ¸ñÊ½»¯Æ÷³åÍ»
 	requires (!std::is_same_v<Range, std::string> &&
 !std::is_same_v<Range, std::string_view>)
 struct std::formatter<Range>
 {
 
-	// parse º¯Êı¿ÉÒÔ±£³Ö¼òµ¥£¬ÒòÎªËü²»´¦ÀíÌØÊâµÄ¸ñÊ½ËµÃ÷·û
 	constexpr auto parse(std::format_parse_context & ctx)
 	{
 		return ctx.begin();
 	}
 
-	// format º¯ÊıÖ´ĞĞÊµ¼ÊµÄ¸ñÊ½»¯¹¤×÷
 	template <typename FormatContext>
 	auto format(const Range & r, FormatContext & ctx) const
 	{
 		auto out = ctx.out();
 
-		// 1. ´òÓ¡¿ªÀ¨ºÅ
 		*out++ = '[';
 
-		// 2. µü´ú·¶Î§ÄÚµÄÔªËØ
 		bool first = true;
 		for(const auto & val : r)
 		{
 			if(!first)
 			{
-				// ÔÚÔªËØÖ®¼ä´òÓ¡·Ö¸ô·û
 				out = std::format_to(out, ", ");
 			}
 			first = false;
 
-			// 3. µİ¹éµØµ÷ÓÃ std::format_to À´¸ñÊ½»¯µ±Ç°ÔªËØ
-			//    Õâ»á×Ô¶¯Îª val ÕÒµ½ÕıÈ·µÄ¸ñÊ½»¯Æ÷£¨¿ÉÄÜÊÇÁíÒ»¸ö·¶Î§£¬»òÊÇ rational£¬»òÊÇ int µÈ£©
 			out = std::format_to(out, "{}", val);
 		}
 
-		// 4. ´òÓ¡±ÕÀ¨ºÅ
+		// 4. æ‰“å°é—­æ‹¬å·
 		*out++ = ']';
 
 		return out;
