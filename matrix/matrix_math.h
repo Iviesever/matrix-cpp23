@@ -1,3 +1,5 @@
+// Copyright (c) 2025 Iviesever
+
 #pragma once
 #include <concepts>
 #include <type_traits>
