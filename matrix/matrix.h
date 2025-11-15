@@ -1,3 +1,5 @@
+// Copyright (c) 2025 Iviesever
+
 #pragma once
 
 #include "matrix_concepts.h"
@@ -223,7 +225,7 @@ public:
 		{
 			auto s = cols() - rank;
 
-			// ÕÒµ½Ö÷ÔªÁĞ
+			// æ‰¾åˆ°ä¸»å…ƒåˆ—
 			std::vector<size_t> pivot_columns;
 			for(size_t i = 0; i < rank; ++i)
 			{
@@ -237,7 +239,7 @@ public:
 				}
 			}
 
-			// ÕÒµ½×ÔÓÉÁĞ
+			// æ‰¾åˆ°è‡ªç”±åˆ—
 			std::vector<size_t> free_columns;
 			for(size_t j = 0; j < cols(); ++j)
 			{
@@ -247,15 +249,15 @@ public:
 				}
 			}
 
-			// ÎªÃ¿¸ö×ÔÓÉ±äÁ¿´´½¨Ò»¸ö½âÏòÁ¿
+			// ä¸ºæ¯ä¸ªè‡ªç”±å˜é‡åˆ›å»ºä¸€ä¸ªè§£å‘é‡
 			for(auto free_col_index : free_columns)
 			{
 				std::vector<computation_t> solution_vector(cols(), 0);
 
-				// ½«µ±Ç°×ÔÓÉ±äÁ¿ÉèÎª1
+				// å°†å½“å‰è‡ªç”±å˜é‡è®¾ä¸º1
 				solution_vector[free_col_index] = 1;
 
-				// ¸ù¾İRREF¾ØÕóÇó½âÖ÷Ôª±äÁ¿
+				// æ ¹æ®RREFçŸ©é˜µæ±‚è§£ä¸»å…ƒå˜é‡
 				for(size_t i = 0; i < rank; ++i)
 				{
 					auto pivot_col = pivot_columns[i];
@@ -300,26 +302,26 @@ public:
 				if(A[i, j] == 1)
 				{
 					pivot_columns.push_back(j);
-					// Ö÷Ôª±äÁ¿µÄÖµÓÉ b ¾ö¶¨
+					// ä¸»å…ƒå˜é‡çš„å€¼ç”± b å†³å®š
 					particular_solution[j] = b[i, 0];
 					break;
 				}
 			}
 		}
 
-		if(r1 == cols()) // Çé¿ö1: Î¨Ò»½â
+		if(r1 == cols()) // æƒ…å†µ1: å”¯ä¸€è§£
 		{
-			// Ã»ÓĞ×ÔÓÉ±äÁ¿£¬Æë´Î½âÖ»ÓĞÁãÏòÁ¿£¬Í¨½â¾ÍÊÇ¸ÃÌØ½â
+			// æ²¡æœ‰è‡ªç”±å˜é‡ï¼Œé½æ¬¡è§£åªæœ‰é›¶å‘é‡ï¼Œé€šè§£å°±æ˜¯è¯¥ç‰¹è§£
 			std::vector<std::vector<computation_t>> result;
 			result.push_back(particular_solution);
 			return result;
 		}
-		else // r1 < cols(), Çé¿ö2: ÎŞÏŞ½â
+		else // r1 < cols(), æƒ…å†µ2: æ— é™è§£
 		{
-			// Í¨½â = ÌØ½â + Æë´Î½â
-			auto basis = solve_homogeneous(); // »ñÈ¡Æë´Î½âµÄ»ù
+			// é€šè§£ = ç‰¹è§£ + é½æ¬¡è§£
+			auto basis = solve_homogeneous(); // è·å–é½æ¬¡è§£çš„åŸº
 
-			basis.push_back(particular_solution); // ½«ÌØ½âÌí¼Óµ½·µ»Ø¼¯ºÏÖĞ
+			basis.push_back(particular_solution); // å°†ç‰¹è§£æ·»åŠ åˆ°è¿”å›é›†åˆä¸­
 
 			return basis;
 		}
@@ -970,7 +972,7 @@ struct std::formatter<std::vector<Complex>>
 		auto it = ctx.begin();
 		if(it != ctx.end() && *it != '}')
 		{
-			sep_ = *it; // ÀıÈç¸ñÊ½×Ö·û´®Îª"{:;}"£¬Ôò·Ö¸ô·ûÎª';'
+			sep_ = *it; // ä¾‹å¦‚æ ¼å¼å­—ç¬¦ä¸²ä¸º"{:;}"ï¼Œåˆ™åˆ†éš”ç¬¦ä¸º';'
 			++it;
 		}
 		return it;
