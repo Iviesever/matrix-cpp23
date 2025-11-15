@@ -1,3 +1,4 @@
+[**简体中文**](./readme-cn.md)
 # Matrix Calculator
 
 **By lviesever**
