@@ -138,7 +138,6 @@ struct std::formatter<Range>
 			out = std::format_to(out, "{}", val);
 		}
 
-		// 4. 打印闭括号
 		*out++ = ']';
 
 		return out;
